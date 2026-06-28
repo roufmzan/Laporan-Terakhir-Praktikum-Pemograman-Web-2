@@ -16,6 +16,14 @@ Proyek ini menghubungkan backend CodeIgniter 4 dengan frontend Vue.js untuk memb
 | **Demo** | [Link Demo](https://praktikumterakhir.infinityfreeapp.com/#/) |
 | **Vidio penjelasan**| [Link Vidio Youtube]() |
 
+**Live Preview / Demo Aplikasi:**
+- **URL Frontend (Admin Panel):** [http://praktikumterakhir.infinityfreeapp.com/#/](http://praktikumterakhir.infinityfreeapp.com/#/)
+- **URL Frontend (User/Publik):** [http://praktikumterakhir.infinityfreeapp.com/backend/public/artikel](http://praktikumterakhir.infinityfreeapp.com/backend/public/artikel)
+
+**Kredensial Login Admin:**
+- **Email/Username:** `admin` atau `admin@email.com`
+- **Password:** `admin123`
+
 
 ## 📑 Daftar Isi Praktikum
 
