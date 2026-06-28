@@ -25,8 +25,8 @@ Proyek ini menghubungkan backend CodeIgniter 4 dengan frontend Vue.js untuk memb
 | **Universitas** | Universitas Pelita Bangsa |
 | **Mata Kuliah** | Pemrograman Mobile 2 |
 | **Dosen Pengampu** | Donny Maulana, S.Kom., M.M.S.I. |
-| **Demo Aplikasi** | [Tonton Video Demo di YouTube](https://youtube.com/shorts/RWibO1WeITU?feature=share) |
-| **Manajemen Proyek**| [Lihat Project di ClickUp](https://sharing.clickup.com/90181759596/b/h/6-901812361216-2/fa74978ca2faf70) |
+| **Demo** | [Link Demo](https://youtube.com/shorts/RWibO1WeITU?feature=share) |
+| **Vidio penjelasan**| [Link Vidio Youtube](https://sharing.clickup.com/90181759596/b/h/6-901812361216-2/fa74978ca2faf70) |
 
 
 ## 📑 Daftar Isi Praktikum
