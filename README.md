@@ -14,7 +14,7 @@ Proyek ini menghubungkan backend CodeIgniter 4 dengan frontend Vue.js untuk memb
 | **NIM** | 312410157 |
 | **Kelas** | I.24.1A |
 | **Demo** | [Link Demo](https://praktikumterakhir.infinityfreeapp.com/#/) |
-| **Vidio penjelasan**| [Link Vidio Youtube]() |
+| **Vidio penjelasan**| [Link Vidio Youtube](https://youtu.be/pK2RxvV5LtE) |
 
 **Live Preview / Demo Aplikasi:**
 - **URL Frontend (Admin Panel):** [http://praktikumterakhir.infinityfreeapp.com/#/](http://praktikumterakhir.infinityfreeapp.com/#/)
