@@ -48,258 +48,169 @@ Proyek ini menghubungkan backend CodeIgniter 4 dengan frontend Vue.js untuk memb
 
 ---
 
-## 📝 Detail Praktikum
+# Laporan Praktikum Pemrograman Web 2 (CodeIgniter 4)
 
-### 1️⃣ Praktikum 1: Pengenalan PHP Framework & Instalasi CodeIgniter 4
-* **Tujuan:** Memahami konsep dasar Framework, arsitektur *Model-View-Controller* (MVC), serta melakukan inisiasi awal project menggunakan CodeIgniter 4.
-* **Langkah Kerja:**
-  1. Membuka file konfigurasi PHP (`php.ini`) via XAMPP Control Panel untuk mengaktifkan ekstensi wajib: `php-json`, `php-mysqlnd`, `php-xml`, `php-intl`, dan `libcurl`.
-  2. Mengunduh arsip CodeIgniter 4, mengekstraknya ke direktori kerja web server (`htdocs/lab11_php_ci`), dan mengubah strukturnya.
-  3. Menjalankan perintah bawaan CLI Command Line Tool melalui terminal:
-     ```bash
-     php spark serve
-     ```
-  4. Menyalin file `.env` dan mengaktifkan mode debugging dengan mengubah parameter `CI_ENVIRONMENT` menjadi `development`.
-* **Hasil Akhir:** Tampilan halaman bawaan (*Welcome Page*) CodeIgniter 4 berhasil dimuat dengan sempurna pada alamat port lokal `http://localhost:8080`.
+## Praktikum 1: PHP Framework (CodeIgniter)
 
-### 2️⃣ Praktikum 2: Framework Lanjutan - Pembuatan CRUD Sederhana
-* **Tujuan:** Memahami konsep dasar manipulasi database menggunakan entitas Model serta mengimplementasikan operasi dasar CRUD (*Create, Read, Update, Delete*).
-* **Langkah Kerja:**
-  1. Membuat database baru bernama `lab_ci4` dan menginisialisasi skema tabel `artikel`:
-     ```sql
-     CREATE TABLE artikel (
-         id INT(11) AUTO_INCREMENT PRIMARY KEY,
-         judul VARCHAR(200) NOT NULL,
-         isi TEXT,
-         gambar VARCHAR(200),
-         status TINYINT(1) DEFAULT 0,
-         slug VARCHAR(200)
-     );
-     ```
-  2. Melakukan konfigurasi detail kredensial koneksi database MySQL pada file `.env` proyek.
-  3. Membangun file Model data `ArtikelModel.php` di dalam direktori `app/Models` dengan mendaftarkan field-field yang diizinkan (`$allowedFields`).
-  4. Menyusun metode pengolah data di Controller dan menyediakan formulir HTML untuk menambah, mengubah, serta menghapus data artikel.
-* **Hasil Akhir:** Aplikasi dasar portal berita mampu menyimpan data langsung ke dalam tabel database MySQL.
+### 1. Instalasi dan Konfigurasi CodeIgniter
+CodeIgniter 4 diinstal menggunakan Composer. Environment dikonfigurasi melalui file `.env` dengan mengatur `CI_ENVIRONMENT = development`.
 
-### 3️⃣ Praktikum 3: Struktur Tampilan Menggunakan View Layout & View Cell
-* **Tujuan:** Mengorganisasi struktur visual user-interface secara modular menggunakan fitur bawaan *View Layout* dan *View Cell* agar kode program lebih reusable.
-* **Langkah Kerja:**
-  1. Membuat struktur folder template tata letak utama pada direktori `app/Views/layout/main.php`.
-  2. Menentukan wilayah penempatan dinamis konten halaman utama menggunakan potongan perintah:
-     ```php
-     <?= $this->renderSection('content') ?>
-     ```
-  3. Memasukkan pemanggilan komponen parsial header, navigasi menu, dan footer ke dalam template dasar.
-  4. Membuat komponen dinamis *View Cell* untuk menampilkan widget "Artikel Terkini" secara independen di panel samping halaman web.
-* **Hasil Akhir:** Seluruh halaman visual website (Halaman Utama, Tentang, Kontak) menggunakan cetakan layout master yang seragam dan rapi.
+*(Silakan tambahkan Screenshot tampilan awal CodeIgniter di sini)*
+`![Screenshot Instalasi](screenshot/ci4_welcome.png)`
 
-### 4️⃣ Praktikum 4: Implementasi Modul Login, Autentikasi, & Filter
-* **Tujuan:** Memahami mekanisme sistem keamanan aplikasi melalui manajemen session autentikasi user dan penerapan pembatasan hak akses route (*Filter*).
-* **Langkah Kerja:**
-  1. Membuat tabel database baru bernama `user` untuk menampung rekaman data autentikasi user pengelola.
-  2. Membangun berkas `UserModel.php` dan merancang Controller khusus proses pendaftaran serta verifikasi kata sandi masuk admin.
-  3. Menyusun class Filter autentikasi khusus (`AuthFilter.php`) guna memvalidasi status hak akses aktif user sebelum masuk menu admin.
-  4. Mendaftarkan filter tersebut ke dalam file konfigurasi routes utama (`app/Config/Filters.php`).
-* **Hasil Akhir:** Halaman administrasi data kelola berita aman secara penuh dari akses ilegal non-admin. Jika diakses paksa, pengguna otomatis dialihkan ke halaman login.
+### 2. Controller dan Routing
+Membuat controller `Page` dengan beberapa method seperti `about`, `contact`, `faqs`, dan `tos`. Route dikonfigurasi di `app/Config/Routes.php` dan fitur AutoRoute diaktifkan.
 
-### 5️⃣ Praktikum 5: Fitur Penomoran Halaman (Pagination) & Pencarian Data
-* **Tujuan:** Mengimplementasikan teknik pembatasan baris data (*Pagination*) dan query penyaringan data (*Searching*) untuk mengoptimalkan pemuatan data dalam jumlah besar.
-* **Langkah Kerja:**
-  1. Mengubah struktur logika pemanggilan data model pada metode controller `admin_index()`:
-     ```php
-     $this->artikelModel->paginate(10);
-     ```
-  2. Merangkai link navigasi pagination halaman dinamis pada file view dengan kode bawaan engine:
-     ```php
-     <?= $pager->links() ?>
-     ```
-  3. Menambahkan klausa penyaringan query database `like()` berdasarkan parameter masukan string dari form pencarian admin.
-* **Hasil Akhir:** Tampilan baris daftar data artikel pada panel admin terbagi rapi maksimal 10 rekaman per halaman dan dilengkapi form pencarian teks.
+*(Silakan tambahkan Screenshot halaman About/TOS di sini)*
+`![Screenshot Halaman About](screenshot/about_page.png)`
 
-### 6️⃣ Praktikum 6: Relasi Antar Tabel (One-to-Many) & Query Builder
-* **Tujuan:** Menerapkan relasi basis data antar tabel (*One-to-Many*) dan menyatukan data menggunakan query join via platform *Query Builder* CodeIgniter 4.
-* **Langkah Kerja:**
-  1. Membuat tabel master data pendukung bertajuk `kategori` dan menghubungkannya ke dalam struktur tabel `artikel` melalui kolom foreign key `id_kategori`.
-  2. Menyusun string sintaks pengambilan data join relasi tabel menggunakan pustaka Query Builder:
-     ```php
-     $builder = $db->table('artikel');
-     $builder->select('artikel.*, kategori.nama_kategori');
-     $builder->join('kategori', 'kategori.id_kategori = artikel.id_kategori');
-     ```
-  3. Mengubah antarmuka form input tambah data artikel agar menyediakan pilihan dropdown dinamis yang bersumber dari tabel kategori.
-* **Hasil Akhir:** Setiap entitas artikel berita yang diterbitkan memiliki status klasifikasi kategori yang jelas dan informatif.
+### 3. Layout Web dengan CSS
+Layout dasar dibuat menggunakan file `style.css` pada folder `public`. Layout dipisahkan menjadi file `header.php` dan `footer.php` di folder `app/Views/template/` sehingga mempermudah proses templating.
 
-### 7️⃣ Praktikum 7: Fitur Validasi Form & Unggah File Gambar Artikel
-* **Tujuan:** Mengimplementasikan komponen pengaman data berupa aturan validasi input form dan melakukan manajemen berkas media (*File Upload*) gambar ke dalam direktori server.
-* **Langkah Kerja:**
-  1. Menambahkan atribut parameter forms wajib berupa properti `enctype="multipart/form-data"` pada komponen view.
-  2. Menentukan skema aturan validasi berkas pada controller seperti tipe ekstensi media, batas ukuran berkas maks, serta pesan peringatan error.
-  3. Memanfaatkan method pembantu eksekusi perpindahan lokasi penyimpanan berkas media fisik ke penyimpanan lokal:
-     ```php
-     $fileGambar->move(ROOTPATH . 'public/gambar');
-     ```
-* **Hasil Akhir:** Aplikasi mampu memvalidasi input teks dengan ketat serta berhasil menyimpan file unggahan gambar artikel ke folder tujuan.
+*(Silakan tambahkan Screenshot layout web di sini)*
+`![Screenshot Layout](screenshot/layout.png)`
 
-### 8️⃣ Praktikum 8: Integrasi AJAX (Asynchronous JavaScript and XML)
-* **Tujuan:** Memahami cara kerja pengiriman request asinkronus menggunakan AJAX untuk memuat data tanpa memicu proses muat ulang halaman (*Page Reload*) secara utuh.
-* **Langkah Kerja:**
-  1. Memasang link library pendukung framework frontend jQuery CDN pada baris cetakan layout utama.
-  2. Membangun endpoint URL internal khusus pada pengelola data controller yang mengembalikan kembalian data berupa respons format objek JSON.
-  3. Menyusun skrip JavaScript fungsi penangkap request asinkronus menggunakan perintah `$.ajax()` atau `$.getJSON()`.
-* **Hasil Akhir:** Proses manipulasi pemuatan komponen data antarmuka terasa sangat responsif, dinamis, dan mempercepat pengalaman interaksi user.
+## Praktikum 2: Framework Lanjutan (CRUD)
 
-### 9️⃣ Praktikum 9: Implementasi AJAX Pagination & Live Search
-* **Tujuan:** Menggabungkan fungsi sistem navigasi halaman (Pagination) dan pencarian data agar berjalan secara asinkronus memanfaatkan AJAX.
-* **Langkah Kerja:**
-  1. Menyesuaikan metode penanganan request pada controller admin agar mampu memilah tipe request biasa atau bertipe request AJAX.
-  2. Menangkap trigger event input pengetikan teks user pada kolom pencarian menggunakan perintah jQuery `.on('keyup')`.
-  3. Mengirimkan parameter string pencarian tersebut ke backend secara langsung di latar belakang aplikasi dan memperbarui blok kontainer tabel HTML secara instan.
-* **Hasil Akhir:** Fitur *Live Search* dan pemindahan halaman penomoran berjalan mulus tanpa interupsi kedipan penyegaran layar browser.
+### 1. Pembuatan Database
+Dibuat database `lab_ci4` dan tabel `artikel`. Anda dapat menggunakan file `database.sql` untuk mengimpor tabel dan contoh data secara langsung ke database MySQL.
 
-### 🔟 Praktikum 10: Pembangunan RESTful API Backend dengan format JSON
-* **Tujuan:** Memahami arsitektur sistem integrasi antarmuka aplikasi modern menggunakan arsitektur RESTful API yang menghasilkan output data terstandardisasi format JSON.
-* **Langkah Kerja:**
-  1. Membuat controller API khusus dengan mewarisi kelas core bawaan CodeIgniter 4 yaitu `ResourceController`.
-  2. Memanfaatkan library `ResponseTrait` untuk mempermudah penyusunan struktur status kode respons HTTP otomatis.
-  3. Menyusun deretan fungsi standar endpoint API: `index()` (GET), `show()` (GET), `create()` (POST), `update()` (PUT), dan `delete()` (DELETE).
-  4. Melakukan simulasi pengujian kualitas respons HTTP, format objek, dan fungsionalitas CRUD endpoint API menggunakan aplikasi REST Client Postman.
-* **Hasil Akhir:** Backend sistem siap bertindak sebagai penyedia resource data (*REST Server*) yang dapat diintegrasikan dengan platform lain.
+*(Silakan tambahkan Screenshot phpMyAdmin / CLI MySQL di sini)*
+`![Screenshot Database](screenshot/database.png)`
 
-### 1️⃣1️⃣ Praktikum 11: Implementasi RESTful API Client & Pengujian Endpoint
-* **Tujuan:** Mengimplementasikan peran aplikasi sebagai konsumen layanan (*REST Client*) yang melakukan konsumsi pertukaran data dari penyedia server luar.
-* **Langkah Kerja:**
-  1. Menginisialisasi pustaka HTTP Client bawaan CodeIgniter 4 (`Config\Services::curlrequest()`) pada sisi client proyek.
-  2. Melakukan request eksternal menuju URL RESTful API yang telah dibangun pada modul sebelumnya.
-  3. Melakukan parsing (dekode) data string mentah objek JSON menjadi bentuk format array asosiatif PHP agar bisa dirender pada interface views.
-* **Hasil Akhir:** Modul integrasi antar platform eksternal berjalan lancar dengan respon data yang sinkron.
+### 2. Model dan Menampilkan Data (Portal Berita)
+Dibuat `ArtikelModel` untuk memproses data dari database. Method `index` pada controller `Artikel` digunakan untuk mengambil data dari database dan menampilkannya pada view `artikel/index`. Terdapat pula method `view()` untuk menampilkan detail artikel menggunakan parameter _slug_.
 
-### 1️⃣2️⃣ Praktikum 12: Pengenalan Arsitektur Clean Code & Pengaturan Environment
-* **Tujuan:** Memahami penataan pola arsitektur kode bersih (*Clean Code*), pemisahan logika bisnis yang ideal, serta manajemen rahasia kredensial sistem.
-* **Langkah Kerja:**
-  1. Melakukan refactoring terhadap struktur fungsi kode yang terlalu gemuk di dalam Controller untuk dipindahkan ke dalam lapisan *Service Layer*.
-  2. Mengamankan seluruh variabel sensitif proyek seperti enkripsi enkoder, API Key, password database ke dalam file `.env`.
-  3. Memastikan file `.env` telah terdaftar di dalam pengecualian file `.gitignore` repositori git.
-* **Hasil Akhir:** Source code aplikasi menjadi jauh lebih terstruktur, mudah dibaca, aman, dan siap dikembangkan dalam tim skala besar.
+*(Silakan tambahkan Screenshot halaman portal dan detail berita di sini)*
+`![Screenshot Portal Berita](screenshot/portal_berita.png)`
+`![Screenshot Detail Berita](screenshot/detail_berita.png)`
 
-### 1️⃣3️⃣ Praktikum 13: Implementasi Web Security & Penanganan SQL Injection
-* **Tujuan:** Memperkuat keamanan sistem web dari potensi celah serangan siber berbahaya seperti *SQL Injection* dan *Cross-Site Scripting* (XSS).
-* **Langkah Kerja:**
-  1. Mengganti seluruh query database manual mentah menjadi fungsi Query Builder atau metode *Prepared Statements* bawaan Model Object.
-  2. Menerapkan fitur proteksi token CSRF (*Cross-Site Request Forgery*) secara menyeluruh pada setiap form input kirim data portal.
-  3. Menggunakan fungsi pembantu filter keamanan data masukan:
-     ```php
-     esc($userInputString)
-     ```
-* **Hasil Akhir:** Aplikasi portal berita tangguh dan aman dari injeksi script berbahaya yang dapat merusak database.
+### 3. Menu Admin (CRUD)
+Dibuat layout khusus `admin_header.php` dan `admin_footer.php` untuk menu admin. Di dalam menu admin, kita dapat melakukan fitur Create, Read, Update, Delete (CRUD) untuk artikel:
+- **Index**: Menampilkan seluruh artikel di admin portal.
+- **Add**: Menambahkan artikel baru ke database.
+- **Edit**: Mengubah artikel lama.
+- **Delete**: Menghapus artikel.
 
-### 1️⃣4️⃣ Praktikum 14: Finalisasi Proyek Portal Berita & Deployment Hosting
-* **Tujuan:** Melakukan optimasi final aplikasi portal berita secara menyeluruh dan melakukan proses perilisan web agar dapat diakses publik (*Deployment*).
-* **Langkah Kerja:**
-  1. Menghapus data simulasi sampah pengujian dan mengubah konfigurasi parameter `CI_ENVIRONMENT` dari `development` menjadi `production`.
-  2. Melakukan kompresi aset gambar, script CSS, dan JavaScript agar ukuran loading web menjadi lebih ringan.
-  3. Mengekspor database lokal ke dalam file format `.sql` dan mengunggahnya ke server database hosting online (cPanel/000webhost/Vercel).
-  4. Menyesuaikan konfigurasi jalur URL utama server pada properti `app.baseURL`.
-* **Hasil Akhir:** Aplikasi portal berita web resmi online penuh di jaringan internet dan siap diakses oleh masyarakat luas melalui tautan domain publik.
+*(Silakan tambahkan Screenshot Admin Panel di sini)*
+`![Screenshot Admin Panel](screenshot/admin_panel.png)`
+*(Silakan tambahkan Screenshot Form Tambah/Ubah Artikel di sini)*
+`![Screenshot Form Artikel](screenshot/form_artikel.png)`
 
----
+## Praktikum 3: View Layout dan View Cell
 
-## 🚀 Fitur Utama
+### 1. View Layout
+Pembaruan struktur template menggunakan fitur **View Layout** pada CodeIgniter 4 (`extend()` dan `renderSection()`). Layout utama dipindahkan ke `app/Views/layout/main.php`. View konten statis dan portal berita telah dimodifikasi agar mewarisi tata letak utama ini, membuat kode view menjadi jauh lebih bersih.
 
-- **CRUD Artikel Lengkap**: Create, Read, Update, Delete artikel.
-- **Backend CodeIgniter 4**: Framework PHP modern dan powerful.
-- **Frontend Vue.js**: Framework JavaScript reaktif dan *component-based*.
-- **RESTful API**: API endpoints yang terstruktur dengan baik.
-- **Desain Responsif**: Tampilan yang menyesuaikan dengan berbagai ukuran layar.
+*(Silakan tambahkan Screenshot Tampilan Halaman dengan Layout Baru di sini)*
+`![Screenshot Layout Praktikum 3](screenshot/layout_p3.png)`
 
-## 📋 Prasyarat Sistem
+### 2. View Cell (Artikel Terkini)
+Pembuatan **View Cell** `ArtikelTerkini` untuk menampilkan daftar 5 artikel terbaru di sidebar. Fitur ini bersifat modular dan dipanggil langsung pada layout sidebar. Struktur databasenya telah diperbarui dengan field `created_at` untuk mendukung fitur artikel terbaru.
 
-Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
+*(Silakan tambahkan Screenshot Sidebar Artikel Terkini di sini)*
+`![Screenshot View Cell Sidebar](screenshot/view_cell_sidebar.png)`
 
-- **XAMPP** atau server lokal lainnya (Apache + MySQL)
-- **PHP** versi 8.2 atau lebih tinggi
-- **Composer** (untuk *dependency management* PHP)
-- **Node.js** dan **npm** (untuk *development* Vue.js)
 
-## 📁 Struktur Proyek
+## Praktikum 4: Framework Lanjutan (Modul Login)
 
-```text
-lab7_php_ci/
-├── app/                      # CI4 App (versi 1)
-│   ├── Controllers/          # Controller aplikasi
-│   ├── Models/               # Model database
-│   ├── Views/                # View templates
-│   └── Config/               # Konfigurasi aplikasi
-├── ci4/                      # CI4 App (versi 2, dengan frontend Vue)
-│   ├── app/                  # Application core
-│   ├── public/               # Public assets
-│   ├── system/               # CodeIgniter system files
-│   ├── writable/             # Writable directories
-│   └── frontend-vuejs/       # Frontend Vue.js
-├── composer.json             # PHP dependencies
-├── env                       # Template konfigurasi environment
-└── spark                     # CLI tool
-```
-## 🛠️ Instalasi
+### 1. Auth Filter & Login System
+Membuat modul **Login** menggunakan model `UserModel` dan controller `User`. Sistem login menggunakan validasi password hashing standar PHP (`password_verify`).
 
-1. **Clone repository**
-   ```bash
-   git clone https://github.com/username/Laporan-Terakhir-Praktikum-Pemograman-Web-2-main.git
-   cd Laporan-Terakhir-Praktikum-Pemograman-Web-2-main
-   ```
+Untuk mengamankan akses ke halaman Admin (CRUD), telah dibuat **Filter** `Auth` (`app/Filters/Auth.php`) yang memverifikasi session login user sebelum mengizinkan akses ke rute `/admin/*`. Jika belum login, user akan dikembalikan ke form login.
 
-2. **Install dependencies**
-   ```bash
-   composer install
-   ```
+*(Silakan tambahkan Screenshot Halaman Login di sini)*
+`![Screenshot Form Login](screenshot/form_login.png)`
 
-3. **Konfigurasi environment**
-   ```bash
-   cp env .env
-   ```
-   Edit file `.env` dan sesuaikan konfigurasi database Anda.
+### 2. Database Seeder
+Akun dummy admin dibuat menggunakan fitur Seeder dari CodeIgniter (`app/Database/Seeds/UserSeeder.php`), memudahkan persiapan data awal saat deployment atau ujicoba (dengan mengeksekusi `php spark db:seed UserSeeder`). Email: `admin@email.com`, Password: `admin123`.
 
-4. **Setup database**
-   - Buat database baru di MySQL/phpMyAdmin
-   - Import file SQL jika tersedia
-   - Konfigurasi koneksi database di `.env`
+*(Silakan tambahkan Screenshot Hasil Uji Coba Login ke Admin Dashboard di sini)*
+`![Screenshot Login Sukses](screenshot/login_success.png)`
+## Praktikum 5: Pagination dan Pencarian
 
-## 🚀 Menjalankan Aplikasi
+### 1. Pagination & Search di Admin Panel
+Fitur *Pagination* diimplementasikan menggunakan fungsi `paginate()` dari *Query Builder* CodeIgniter 4, untuk memecah daftar artikel menjadi halaman-halaman yang lebih kecil (10 data per halaman).
+Fitur pencarian (*Search*) ditambahkan dengan menambahkan method `like()` pada query untuk memfilter data berdasarkan kata kunci yang diketik user.
 
-### Backend (CodeIgniter 4)
+*(Silakan tambahkan Screenshot Pagination & Form Pencarian di sini)*
+`![Screenshot Pagination](screenshot/pagination.png)`
+`![Screenshot Search](screenshot/search.png)`
 
-Pastikan XAMPP sudah berjalan, lalu akses backend di:
-```
-http://localhost/lab7_php_ci/ci4/public
-```
+## Praktikum 6: Relasi Tabel dan Query Builder
 
-### Frontend (Vue.js)
+### 1. Kategori dan Relasi One-to-Many
+Dibuat tabel baru bernama `kategori` untuk mengelompokkan artikel. Tabel `artikel` di-update dengan field `id_kategori` sebagai *Foreign Key*.
+Di sisi kode, dibuat `KategoriModel` dan *Query Builder* digunakan dengan metode `join()` pada `ArtikelModel` untuk mengambil data relasional (Nama Kategori dari tabel kategori berdasarkan `id_kategori` di tabel artikel).
 
-Buka file `ci4/frontend VueJS/index.html` di browser atau jalankan development server:
-```bash
-cd ci4/frontend VueJS
-npm install
-npm run dev
-```
+### 2. Implementasi Relasi pada Aplikasi
+Nama kategori telah ditampilkan baik di halaman *Public* (Portal Berita & Detail Berita) maupun halaman *Admin*. Pada form pembuatan dan pengeditan artikel, pengguna dapat memilih kategori dari *dropdown* `<select>` yang datanya diambil secara dinamis dari database.
 
-## 📡 API Endpoints
+*(Silakan tambahkan Screenshot Daftar Artikel dengan Kategori di sini)*
+`![Screenshot Artikel Kategori](screenshot/artikel_kategori.png)`
+*(Silakan tambahkan Screenshot Form Dropdown Kategori di sini)*
+`![Screenshot Form Kategori](screenshot/form_kategori.png)`
 
-| Method | Endpoint        | Deskripsi                  |
-|--------|-----------------|---------------------------|
-| GET    | /post           | Ambil semua artikel       |
-| POST   | /post           | Tambah artikel baru       |
-| PUT    | /post/:id       | Update artikel by ID      |
-| DELETE | /post/:id       | Hapus artikel by ID       |
+## Praktikum 7: Upload File Gambar
 
-## 🛠️ Teknologi yang Digunakan
+### 1. Upload Gambar pada Artikel
+Menambahkan fungsionalitas unggah berkas (gambar) pada form *Tambah Artikel* (dan Edit Artikel) sehingga pengguna dapat melampirkan *thumbnail* pada tulisannya.
+Pada sisi form (View), ditambahkan atribut `enctype="multipart/form-data"` beserta tag `<input type="file" name="gambar">`. Di sisi Controller (`Artikel.php`), gambar tersebut ditangani menggunakan fungsi `$this->request->getFile('gambar')` lalu dipindahkan ke folder `public/gambar` di proyek sebelum nama filenya disimpan ke database.
 
-### Backend
-- **PHP 8.2+** - Bahasa pemrograman server-side
-- **CodeIgniter 4** - Framework PHP
-- **MySQL** - Database management system
+*(Silakan tambahkan Screenshot Uji Coba Upload Gambar di sini)*
+`![Screenshot Form Upload](screenshot/form_upload.png)`
+`![Screenshot Gambar Tersimpan](screenshot/gambar_tersimpan.png)`
 
-### Frontend
-- **Vue.js 3** - Framework JavaScript
-- **HTML5/CSS3** - Markup dan styling
-- **JavaScript (ES6+)** - Logika frontend
+## Praktikum 8: AJAX
 
-## 🙏 Terima Kasih
+### 1. Manipulasi Data secara Asynchronous
+Penerapan **AJAX (Asynchronous JavaScript and XML)** menggunakan *library jQuery* untuk mengambil dan menghapus data tanpa perlu memuat ulang seluruh halaman (reload).
+
+Fitur ini diimplementasikan di halaman `/ajax`. Saat halaman diakses, script jQuery akan memanggil URL `/ajax/getData` di latar belakang (melalui method `$.ajax` ber-tipe `GET`) untuk mengambil data artikel berformat JSON lalu menampilkannya dalam tabel. Terdapat juga fungsionalitas Hapus (Delete) dengan memanggil URL `/ajax/delete/id` menggunakan method `DELETE`.
+
+*(Silakan tambahkan Screenshot Halaman AJAX di sini)*
+`![Screenshot AJAX Table](screenshot/ajax_table.png)`
+*(Silakan tambahkan Screenshot Halaman Console saat Penghapusan di sini)*
+`![Screenshot AJAX Delete](screenshot/ajax_delete.png)`
+
+## Praktikum 9: Implementasi AJAX Pagination dan Search
+
+### 1. Halaman Admin Dinamis (SPA)
+Halaman panel admin untuk daftar artikel (`/admin/artikel`) telah direstrukturisasi agar menggunakan konsep *Single Page Application* secara parsial. Fitur **Pagination** dan **Pencarian** yang sebelumnya memuat ulang halaman (*reload*) kini telah diubah sepenuhnya berbasis AJAX jQuery.
+Controller `Artikel::admin_index` dimodifikasi agar dapat mendeteksi *request* AJAX dan mengembalikan *response* berupa format JSON yang berisi `artikel` dan informasi `pager`. 
+
+*(Silakan tambahkan Screenshot Uji Coba AJAX Search/Pagination di sini)*
+`![Screenshot AJAX Dashboard](screenshot/ajax_dashboard.png)`
+
+## Praktikum 10: API (REST API CodeIgniter)
+
+### 1. Pembuatan REST Controller
+Untuk mengizinkan aplikasi eksternal (seperti Vue.js, React, atau mobile app) mengakses dan memanipulasi data artikel, dibuat sebuah REST API menggunakan kelas bawaan CI4 `ResourceController`.
+Endpoint API ini berlokasi di URI `/post`, dengan mengimplementasikan operasi CRUD lengkap:
+- `GET /post` - Menampilkan semua artikel.
+- `GET /post/{id}` - Menampilkan detail artikel spesifik.
+- `POST /post` - Menambahkan artikel baru (param: judul, isi).
+- `PUT /post/{id}` - Mengupdate artikel (menggunakan method `x-www-form-urlencoded`).
+- `DELETE /post/{id}` - Menghapus artikel.
+
+*(Silakan tambahkan kumpulan Screenshot pengujian Postman di bawah ini)*
+**Testing GET (Semua Data)**
+`![Screenshot Postman GET](screenshot/postman_get.png)`
+**Testing POST (Tambah Data)**
+`![Screenshot Postman POST](screenshot/postman_post.png)`
+**Testing PUT (Ubah Data)**
+`![Screenshot Postman PUT](screenshot/postman_put.png)`
+**Testing DELETE (Hapus Data)**
+`![Screenshot Postman DELETE](screenshot/postman_delete.png)`
+
+## Praktikum 11 & 12: VueJS SPA
+Aplikasi Frontend terpisah telah dibuat menggunakan **VueJS 3** dan **Vue Router** di repositori terpisah bernama `Lab11Web_VueJS`. Aplikasi SPA tersebut mengkonsumsi REST API yang telah dibuat pada praktikum ini. Silakan lihat folder `Lab11Web_VueJS` untuk kode sumber dan dokumentasinya.
+
+## Praktikum 13: VueJS Autentikasi dan Navigation Guards
+1. **API Login Sisi Server**: Endpoint `/api/login` telah ditambahkan di backend (CodeIgniter 4) untuk memvalidasi *username* dan *password* lalu mengembalikan Token dan data *user* berformat JSON.
+2. **Client-Side Security (VueJS)**: Pada aplikasi Frontend `Lab11Web_VueJS`, rute dilindungi menggunakan *Navigation Guards* (`router.beforeEach`). Pengguna yang belum *login* akan ditolak mengakses halaman `/artikel` dan `/about`.
+
+## Praktikum 14: Token Based Authentication & Axios Interceptors
+Untuk mencegah eksploitasi REST API secara langsung (misal via Postman), *Server-Side Security* telah diterapkan:
+1. **API Auth Filter (CodeIgniter 4)**: Filter `ApiAuthFilter` memblokir akses ke rute memanipulasi artikel (`POST`, `PUT`, `DELETE` pada `/post`) apabila request tidak menyertakan *header* `Authorization: Bearer <token>`. Jika token tidak ada atau tidak valid, API mengembalikan error `401 Unauthorized`.
+2. **Axios Interceptors (VueJS)**: Pada aplikasi Frontend, *Axios Interceptors* ditambahkan pada `app.js` untuk secara otomatis menyuntikkan Token dari `localStorage` ke *header* HTTP setiap kali melakukan *request* ke backend, serta menangkap kode 401 secara global untuk menendang pengguna ke halaman login jika token habis masa berlakunya.
