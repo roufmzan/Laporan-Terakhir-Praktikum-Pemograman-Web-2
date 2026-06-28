@@ -3,15 +3,6 @@
 # Laporan Praktikum Pemrograman Web 2
 ### Lab 7: PHP CodeIgniter 4 & Vue.js
 
-![Universitas](https://img.shields.io/badge/Universitas-Pelita%20Bangsa-blue?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
-![Framework](https://img.shields.io/badge/Framework-CodeIgniter%204-orange?style=for-the-badge)
-
-![PHP](https://img.shields.io/badge/PHP-8.2-blue)
-![CodeIgniter](https://img.shields.io/badge/CodeIgniter-4-red)
-![Vue.js](https://img.shields.io/badge/Vue.js-3-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
 Proyek ini menghubungkan backend CodeIgniter 4 dengan frontend Vue.js untuk membuat aplikasi CRUD artikel. Ini adalah laporan praktikum Pemrograman Web 2 yang mendemonstrasikan integrasi antara framework PHP modern dengan framework JavaScript progresif.
 
 </div>
