@@ -22,9 +22,6 @@ Proyek ini menghubungkan backend CodeIgniter 4 dengan frontend Vue.js untuk memb
 | **Nama** | Ro'uf Muhammad Fauzan |
 | **NIM** | 312410157 |
 | **Kelas** | I.24.1A |
-| **Universitas** | Universitas Pelita Bangsa |
-| **Mata Kuliah** | Pemrograman Mobile 2 |
-| **Dosen Pengampu** | Donny Maulana, S.Kom., M.M.S.I. |
 | **Demo** | [Link Demo](https://youtube.com/shorts/RWibO1WeITU?feature=share) |
 | **Vidio penjelasan**| [Link Vidio Youtube](https://sharing.clickup.com/90181759596/b/h/6-901812361216-2/fa74978ca2faf70) |
 
