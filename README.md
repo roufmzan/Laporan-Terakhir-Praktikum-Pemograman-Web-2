@@ -27,7 +27,7 @@ Proyek ini menghubungkan backend CodeIgniter 4 dengan frontend Vue.js untuk memb
 
 ## 📑 Daftar Isi Praktikum
 
-1. [Praktikum 1: Pengenalan PHP Framework & Instalasi CodeIgniter 4](#-praktikum-1-pengenalan-php-framework--instalasi-codeigniter-4)
+1. [Praktikum 1: Pengenalan PHP Framework & Instalasi CodeIgniter 4](https://github.com/roufmzan/Laporan-Terakhir-Praktikum-Pemograman-Web-2/blob/main/README.md#praktikum-1-php-framework-codeigniter)
 2. [Praktikum 2: Framework Lanjutan - Pembuatan CRUD Sederhana](#-praktikum-2-framework-lanjutan---pembuatan-crud-sederhana)
 3. [Praktikum 3: Struktur Tampilan Menggunakan View Layout & View Cell](#-praktikum-3-struktur-tampilan-menggunakan-view-layout--view-cell)
 4. [Praktikum 4: Implementasi Modul Login, Autentikasi, & Filter](#-praktikum-4-implementasi-modul-login-autentikasi--filter)
